@@ -1,0 +1,622 @@
+{
+	"info": {
+		"_postman_id": "410920ce-dddf-4fd2-b120-3e7e02728387",
+		"name": "Tool Rental API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36488020"
+	},
+	"item": [
+		{
+			"name": "Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Updated to check if the response status is 'UP'\r",
+							"pm.test(\"Response status is 'UP'\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    console.log(response[\"status\"]);\r",
+							"    pm.expect(response[\"status\"]).to.equal('UP');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/Status",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Tools",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//console.log(pm.globals.get(\"toolsID\"));\r",
+							"const response= pm.response.json();\r",
+							"const tools= response.filter((tool) => tool.inStock === true);\r",
+							"\r",
+							"pm.globals.set(\"toolId\",tools[2].id);\r",
+							"\r",
+							"console.log(\"Response ToolID\",tools[2]['id']);\r",
+							"console.log(\"GLobal variables ID\",pm.globals.get('toolId'));\r",
+							"\r",
+							"pm.test(\"Tool Found\",()=>{\r",
+							"\r",
+							"pm.expect(tools[2].id).to.eql(pm.globals.get(\"toolId\"));\r",
+							"\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tools?category={{category}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tools"
+					],
+					"query": [
+						{
+							"key": "results",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "available",
+							"value": "false",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "{{category}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tools?results=3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tools"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "ladders",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "PEX Clamp Tool",
+							"disabled": true
+						},
+						{
+							"key": "results",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Single ToolID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check single Tool\",() =>{\r",
+							"    const response = pm.response.json(); // Added response assignment\r",
+							"    pm.expect(response.id).to.eql(pm.globals.get(\"toolId\"));\r",
+							"    pm.expect(response[\"current-stock\"]).to.be.above(0);\r",
+							"    console.log(\"ID: \"+response.id+\" Current-Stock: \"+response[\"current-stock\"]);\r",
+							"})\r",
+							"\r",
+							"\r",
+							"pm.execution.setNextRequest(\"Create order\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/tools/:toolId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"tools",
+						":toolId"
+					],
+					"query": [
+						{
+							"key": "user-manual",
+							"value": "true",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "toolId",
+							"value": "{{toolId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Fixed TypeError by accessing orderId directly from response\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"//console.log(pm.collectionVariables.get(\"API_Token_CollectionVariable\"));\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"console.log(response.orderId);\r",
+							"pm.globals.set(\"orderID\", response.orderId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"toolId\":{{toolId}},\r\n\"customerName\":\"Deepak S\",\r\n\"comment\":\"Send the detailsj\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/orders/:orderId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"query": [
+						{
+							"key": "invoice",
+							"value": "true",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "{{orderID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"customerName\":\"Arjun {{$randomLastName}}\",\r\n\"comment\":\"Hello updated your order detail\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders/:orderId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "{{orderID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/orders/:orderId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "{{orderID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check if order deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404-Order deleted\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{apiToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/orders/:orderId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "orderId",
+							"value": "{{orderID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register API client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Fixed syntax\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    const token = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"apiToken\", token[\"accessToken\"]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"clientName\": \"Postman11431251\",\r\n   \"clientEmail\": \"valentin0020344@example.com\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api-clients",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api-clients"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://simple-tool-rental-api.glitch.me"
+		},
+		{
+			"key": "apiToken",
+			"value": "069a4ca6afb6f831231278ea6beb701d78f3fcb544ba5eb7080e051297e04933",
+			"type": "string"
+		}
+	]
+}
