@@ -36,7 +36,7 @@ Feature: User Login Page in Amazon
     
    Examples:
    | EmailID | Password |
-   | deepak78068@gmail.com | Deepakbagium# |  
+   | deep@gmail.com | Deep |  
    
    
    
