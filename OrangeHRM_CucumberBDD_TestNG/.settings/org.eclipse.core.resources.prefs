@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/test/java/hooks/Hooks.java=UTF-8
+encoding//src/test/java/pageObjects/AddEmployeePIMPageObject.java=UTF-8
+encoding//src/test/java/pageObjects/LoginPageObject.java=UTF-8
+encoding//src/test/java/utils/TestBase.java=UTF-8
