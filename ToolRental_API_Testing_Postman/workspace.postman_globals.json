@@ -1,0 +1,27 @@
+{
+	"id": "f508da05-8999-452c-8afc-00d3b3ca2546",
+	"values": [
+		{
+			"key": "orderID",
+			"value": "9stVaASCc04LDfVVNb4PH",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "category",
+			"value": "trailers",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "toolId",
+			"value": "5774",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-12-25T13:25:58.400Z",
+	"_postman_exported_using": "Postman/11.23.3"
+}
