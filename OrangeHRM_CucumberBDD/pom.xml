@@ -125,10 +125,7 @@
 </properties>
 -->
 
-  <properties>
-    <!-- tells Maven to assume all source files are encoded in CP1252 -->
-    <project.build.sourceEncoding>windows-1252</project.build.sourceEncoding>
-  </properties>
+
 
 
 
