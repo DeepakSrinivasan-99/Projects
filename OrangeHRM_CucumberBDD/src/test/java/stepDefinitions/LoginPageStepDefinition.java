@@ -37,13 +37,13 @@ public class LoginPageStepDefinition {
     	// 2) Enter both fields with valid creds
     	loginPage.enterCredentials(username,password);
 
-    	// 3) Now clear each and assert its “Required” shows
+    	// 3) Now clear each and assert its Required shows
     	loginPage.clearUsernameAndCheckRequired();
     	loginPage.clearPasswordAndCheckRequired();
 
     	// (4) Finally, if you still want to log in:)
     	loginPage.enterCredentials(username,password);
-    	// …then verify Dashboard, etc.
+    	// then verify Dashboard, etc.
 
     }
 
@@ -55,7 +55,7 @@ public class LoginPageStepDefinition {
 
     @Then("User should be navigated to the Dashboard page")
     public void user_should_be_navigated_to_the_dashboard_page() {
-        // whatever your verifyDashboardPage() is...
+        // whatever your verifyDashboardPage() is
     	loginPage.verifyDashboardPageAfterLogin();
     }
     
@@ -68,13 +68,13 @@ public class LoginPageStepDefinition {
     	// 2) Enter both fields with valid creds
     	loginPage.enterCredentials(username,password);
 
-    	// 3) Now clear each and assert its “Required” shows
+    	// 3) Now clear each and assert its Required shows
     	loginPage.clearUsernameAndCheckRequired();
     	loginPage.clearPasswordAndCheckRequired();
 
     	// (4) Finally, if you still want to log in:)
     	loginPage.enterCredentials(username,password);
-    	// …then verify Dashboard, etc.
+    	//  then verify Dashboard, etc.
 
     }
     @Then("an invalid login error message should be displayed")

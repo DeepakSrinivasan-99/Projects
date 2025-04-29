@@ -17,18 +17,18 @@ public class ConfigReader {
         }
     }
 
-    /** 
-     * Get property value by key. 
-     * @param key The property key
-     * @return the property value, or null if not found
-     */
+  
+     // Get property value by key. 
+     // @param key The property key
+     // @return the property value, or null if not found
+     
     public String get(String key) {
         return prop.getProperty(key);
     }
 
-    /** 
-     * Convenience methods for typed values 
-     */
+    
+     //Convenience methods for typed values 
+     
     public int getInt(String key) {
         return Integer.parseInt(prop.getProperty(key));
     }

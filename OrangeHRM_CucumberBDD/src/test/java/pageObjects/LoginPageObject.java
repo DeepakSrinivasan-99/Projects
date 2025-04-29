@@ -44,10 +44,10 @@ public class LoginPageObject {
     }
 
 
-    /** 
-     * Clears the given input by Ctrl+A, Delete, then TAB 
-     * to trigger the “Required” message 
-     */
+    
+     // Clears the given input by Ctrl+A, Delete, then TAB 
+     // to trigger the Required message 
+     
     private void clearAndTab(WebElement input) {
         input.sendKeys(Keys.CONTROL + "a", Keys.DELETE, Keys.TAB);
         
@@ -58,7 +58,7 @@ public class LoginPageObject {
         clearAndTab(u);
 
         List<WebElement> errs = driver.findElements(errorSpans);
-        String msg = errs.get(0).getText();              // first span → username
+        String msg = errs.get(0).getText();              // first span to username
         Assert.assertEquals(msg, "Required");
         
         
@@ -69,7 +69,7 @@ public class LoginPageObject {
         clearAndTab(p);
 
         List<WebElement> errs = driver.findElements(errorSpans);
-        String msg = errs.get(1).getText();              // second span → password
+        String msg = errs.get(1).getText();              // second span to password
         Assert.assertEquals(msg, "Required");
     }
     

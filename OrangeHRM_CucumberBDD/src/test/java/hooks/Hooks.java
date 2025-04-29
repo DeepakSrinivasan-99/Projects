@@ -18,7 +18,7 @@ public class Hooks {
  
     private final TestContextSetup ctx;
     private final WebDriver driver;
-    private static String mainWindow;       // the original “blank” tab
+    private static String mainWindow;       // the original blank tab
     private String scenarioWindow;          // the tab for the current scenario
 
     public Hooks(TestContextSetup ctx) {
@@ -33,7 +33,7 @@ public class Hooks {
             mainWindow = driver.getWindowHandle();
         }
 
-        // 2) open a brand‐new tab for *this* scenario
+        // 2) open a brand‐new tab for this scenario
         scenarioWindow = driver.switchTo()
                                .newWindow(WindowType.TAB)
                                .getWindowHandle();
@@ -45,7 +45,7 @@ public class Hooks {
 
     //@After
     public void tearDown(Scenario scenario) {
-        // 4) close *only* the scenario’s tab
+        // 4) close only the scenario’s tab
         driver.switchTo().window(scenarioWindow).close();
         // 5) switch back to the main (blank) tab so it's ready for the next scenario
         driver.switchTo().window(mainWindow);
@@ -60,10 +60,10 @@ public class Hooks {
         By waitFor;
         String currentUrl = driver.getCurrentUrl();
         if (currentUrl.contains("/auth/login")) {
-            // on Login page → wait for username input
+            // on Login page wait for username input
             waitFor = By.name("username");
         } else {
-            // after login → wait for Dashboard header
+            // after login  wait for Dashboard header
             waitFor = By.xpath("//h6[text()='Dashboard']");
         }
 
@@ -82,7 +82,7 @@ public class Hooks {
         // 4) Label it PASS or FAIL
         String label = scenario.isFailed() ? "FAIL" : "PASS";
 
-        // 5) Attach with scenario name + label
+        // 5) Attach with scenario name and label
         String screenshotName = scenario.getName() + " [" + label + "]";
         scenario.attach(screenshot, "image/png", screenshotName);
     }
