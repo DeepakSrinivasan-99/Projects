@@ -108,12 +108,7 @@
 <!-- https://mvnrepository.com/artifact/com.github.stephenc.monte/monte-screen-recorder
 
 
-  	<dependency>
-  		<groupId>rahulshettyacademy</groupId>
-  		<artifactId>CucumberFramework</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>  -->
-  	
+  
   	
   </dependencies>
 
@@ -128,8 +123,6 @@
 
 
 
-
-<!--
 <build>
   <plugins>
     <plugin>
@@ -144,6 +137,6 @@
     </plugin>
   </plugins>
 </build>
--->
+
   
 </project>
