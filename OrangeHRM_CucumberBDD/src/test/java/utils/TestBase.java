@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 
 public class TestBase {
 	private static WebDriver driver;
@@ -45,36 +47,38 @@ public class TestBase {
 		return properties;
 	}
 
-        
-        private void initializeDriver(String browser) {
-    if (browser.equals("edge")) {
-        //  make sure you have the matching msedgedriver.exe on the PATH
-        EdgeOptions opts = new EdgeOptions();
-        opts.addArguments("--headless=new");      // headless mode
-        opts.addArguments("--disable-gpu");       // disable GPU acceleration
-        opts.addArguments("--window-size=1920,1080");
-        // if you see security restrictions, you may need:
-        // opts.addArguments("--remote-allow-origins=*");
 
-        driver = new EdgeDriver(opts);
-    }
-    else if (browser.equals("chrome")) {
+
+   private void initializeDriver(String browser) {
+    if (browser.equals("chrome")) {
         ChromeOptions opts = new ChromeOptions();
-        opts.addArguments("--headless=new", "--disable-gpu", "--window-size=1920,1080");
+        // if you want headless on CI:
+        if (Boolean.getBoolean("ci")) {
+            opts.addArguments("--headless=new","--disable-gpu","--window-size=1920,1080");
+        }
         driver = new ChromeDriver(opts);
+
+    } else if (browser.equals("edge")) {
+        EdgeOptions opts = new EdgeOptions();
+        if (Boolean.getBoolean("ci")) {
+            opts.addArguments("--headless=new","--disable-gpu","--window-size=1920,1080");
+        }
+        driver = new EdgeDriver(opts);
+
+    } else if (browser.equals("firefox")) {
+        // same for FirefoxOptions...
+        driver = new FirefoxDriver();
+    } else {
+        throw new RuntimeException("Unsupported browser: " + browser);
     }
-
-	 else if (browser.equalsIgnoreCase("firefox")) {
-			driver = new FirefoxDriver();
-			}
-
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     driver.manage().window().maximize();
     driver.get(properties.getProperty("QAUrl"));
-
 }
 
-	/** Close just the current browser tab */
+
+        
+        	/** Close just the current browser tab */
 	public void closeCurrentTab() {
 		if (driver != null) {
 			driver.close();
