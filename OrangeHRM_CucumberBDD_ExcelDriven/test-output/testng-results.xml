@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="1" failed="2" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-11-16T22:08:15 IST" name="Suite" finished-at="2025-11-16T22:09:12 IST" duration-ms="56959">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.SanityRunner@2235eaab]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2025-11-16T22:08:15 IST" name="Functional Tests" finished-at="2025-11-16T22:09:12 IST" duration-ms="56959">
+      <class name="runners.SanityRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runners.SanityRunner@2235eaab]" started-at="2025-11-16T22:08:15 IST" name="setUpClass" finished-at="2025-11-16T22:08:15 IST" duration-ms="527" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@325f7fa9]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.SanityRunner@2235eaab]" started-at="2025-11-16T22:08:15 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-11-16T22:08:34 IST" duration-ms="18826" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Check Login with Valid credentials and LogOut"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["To Check Login feature of OrangeHRM website"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.SanityRunner@2235eaab]" started-at="2025-11-16T22:08:15 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-11-16T22:08:54 IST" duration-ms="39042" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Add employee with valid details"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Add New Employee"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Success message not visible!]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Success message not visible!
+at pageObjects.AddEmployeePIMPageObject.verifySuccessMessage(AddEmployeePIMPageObject.java:63)
+at stepDefinitions.AddEmployeePIMStepDefinition.the_employee_should_be_added_successfully(AddEmployeePIMStepDefinition.java:95)
+at ✽.the employee should be added successfully(file:///F:/PROGRAMMING_LANGUAGE/Learn%20Cucumber%20BDD%20with%20Java%20-MasterClass%20Selenium%20Framework_RahulShetty/Projects/OrangeHRM_CucumberBDD/OrangeHRM_CucumberBDD_ExcelDriven/src/test/resources/features/PIM.feature:12)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.SanityRunner@2235eaab]" started-at="2025-11-16T22:08:34 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-11-16T22:09:11 IST" duration-ms="37492" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Search existing employee by name"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Add New Employee"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='oxd-table-cell oxd-padding-cell']//div[normalize-space()='Deepak'] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: '4.19.0', revision: '5f9cec8963'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.5'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 142.0.3595.80, fedcm:accounts: true, goog:processID: 14016, ms:edgeOptions: {debuggerAddress: localhost:1184}, msedge: {msedgedriverVersion: 142.0.3595.69 (0f9a54d682af..., userDataDir: C:\Users\DEEPAK~1\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:1184/devtool..., se:cdpVersion: 142.0.3595.80, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 13bde14c8822d3d0cf03c52181a1edab]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='oxd-table-cell oxd-padding-cell']//div[normalize-space()='Deepak'] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: '4.19.0', revision: '5f9cec8963'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.5'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 142.0.3595.80, fedcm:accounts: true, goog:processID: 14016, ms:edgeOptions: {debuggerAddress: localhost:1184}, msedge: {msedgedriverVersion: 142.0.3595.69 (0f9a54d682af..., userDataDir: C:\Users\DEEPAK~1\AppData\L...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:1184/devtool..., se:cdpVersion: 142.0.3595.80, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 13bde14c8822d3d0cf03c52181a1edab
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at pageObjects.BasePage.getText(BasePage.java:45)
+at pageObjects.AddEmployeePIMPageObject.verifySearchedEmployeeByName(AddEmployeePIMPageObject.java:78)
+at stepDefinitions.AddEmployeePIMStepDefinition.emp_record_should_be_displayed(AddEmployeePIMStepDefinition.java:85)
+at ✽.the employee record should be displayed for "Charles"(file:///F:/PROGRAMMING_LANGUAGE/Learn%20Cucumber%20BDD%20with%20Java%20-MasterClass%20Selenium%20Framework_RahulShetty/Projects/OrangeHRM_CucumberBDD/OrangeHRM_CucumberBDD_ExcelDriven/src/test/resources/features/PIM.feature:32)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runners.SanityRunner@2235eaab]" started-at="2025-11-16T22:09:11 IST" name="tearDownClass" finished-at="2025-11-16T22:09:11 IST" duration-ms="56" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- runners.SanityRunner -->
+    </test> <!-- Functional Tests -->
+  </suite> <!-- Suite -->
+</testng-results>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="tests" name="Failed suite [OrangeHRM Full Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="2" parallel="tests" name="Search Employee Tests(failed)">
+    <classes>
+      <class name="runners.SearchEmployeeRunner">
+        <methods>
+          <include name="setUpClass"/>
+          <include name="runScenario" invocation-numbers="0"/>
+          <include name="tearDownClass"/>
+        </methods>
+      </class> <!-- runners.SearchEmployeeRunner -->
+    </classes>
+  </test> <!-- Search Employee Tests(failed) -->
+</suite> <!-- Failed suite [OrangeHRM Full Suite] -->
